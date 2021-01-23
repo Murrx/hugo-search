@@ -7,7 +7,8 @@ export class LunrSearchProvider {
   private isInitialized: boolean = false;
 
   // todo: see if we can use lunr.Index Build or Load.
-  private index: lunr.Index;
+  // todo: this should be private
+  public index: lunr.Index;
   // todo: rename type QueryData to HugoSearchData
   private searchData: QueryData[];
   private queryDataMap: Map<string, QueryData>;
@@ -26,6 +27,7 @@ export class LunrSearchProvider {
     this.search(query);
   };
 
+  // todo: should be private
   async initialize(): Promise<void> {
     // todo: make the json file configurable
     const res = await fetch("/entities/index.json");
@@ -39,14 +41,18 @@ export class LunrSearchProvider {
     if (!this.isInitialized) {
       await this.initialize();
     }
-    let result = [...new Set(this.index.search(query))];
-
-    this.searchStore.value = result.map((r) => this.queryDataMap.get(r.ref)!);
+    if (query) {
+      let result = [...new Set(this.index.search(query))];
+      this.searchStore.value = result.map((r) => this.queryDataMap.get(r.ref)!);
+    } else {
+      this.searchStore.value = [];
+    }
   }
 
   private config(data: QueryData[]) {
     this.searchData = data;
     this.queryDataMap = new Map(data.map((key) => [key.uri, key]));
+    // should use IOC to remove this dependency on lunr
     this.index = lunr(function () {
       this.ref("uri");
       this.field("category");

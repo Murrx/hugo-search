@@ -1,6 +1,7 @@
 import { queryStore, resultsStore } from "../CompositionRoot";
 import { QueryData, Store } from "../types/SearchStore.type";
 
+// todo: make messages configurable
 const welcomeMsg =
   "Welcome to Search-Salone. Please use the search box to find what you are looking for";
 const emptyResultsMsg = "No results found... Please search for something else";
