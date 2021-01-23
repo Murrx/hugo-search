@@ -3,9 +3,7 @@ import { StoreFactory } from "./store";
 import { defineFeature, loadFeature } from "jest-cucumber";
 import { Store } from "./types/SearchStore.type";
 
-const storeFeature = loadFeature(
-  "./assets/js/hugoSearch/features/store.feature"
-);
+const storeFeature = loadFeature("./assets/hugoSearch/features/store.feature");
 
 defineFeature(storeFeature, (test) => {
   let store: Store<any>;
