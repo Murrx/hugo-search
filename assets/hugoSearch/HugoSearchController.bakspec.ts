@@ -3,45 +3,8 @@
 // import HugoSearchLunrService from "./LunrSearchProvider";
 // import SearchStore from "./SearchStore";
 
-// describe("HugoSearchController.instance", () => {
-//   it("calling instance twice should return the same instance", () => {
-//     let oneInstance = SearchStore;
-//     let otherInstance = SearchStore;
-//     expect(oneInstance).to.equal(otherInstance);
-//   });
-// });
-
 // describe("HugoSearchController", () => {
 //   let store;
-
-//todo: go trough earch test and see if it makes sense
-// beforeEach(() => {
-//   // todo: use subscription based model in HugoSearchController so its not necesarry to setup dom
-//   // so instead of refering to global.document and global.window I instead make something else
-//   // responsible for managing the state of the search history?
-//   const { JSDOM } = require("jsdom");
-//   const { window } = new JSDOM(`...`);
-//   global.document = window.document;
-//   global.window = window;
-// });
-
-// afterEach(() => {
-//   // todo: reimplement
-//   // SearchStore.destroy();
-// });
-
-// it("should reflect the value of the query param to the subscribed input field", () => {
-//   window.location.hash = "makeni";
-//   let inputElement = document.createElement("input");
-//   // todo: we probably want to mock the HugoSearchLunrService here
-//   let controller = new InputFieldController(
-//     HugoSearchLunrService,
-//     SearchStore,
-//     inputElement
-//   );
-
-//   expect(inputElement.value).to.equal("makeni");
-// });
 
 //   it.skip("should perform a search when the controller is instantiated while a query param set", () => {
 //     // todo: this test is failing but is the functionality actually working? If so, how do we test it?
