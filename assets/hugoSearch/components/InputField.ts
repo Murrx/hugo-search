@@ -26,7 +26,13 @@ export default class HugoSearchInput
   connectedCallback() {
     // todo: this needs IOC
     this.inputElement = this.firstElementChild as HTMLInputElement;
-    this.inputElement.focus();
+    if (this.inputElement) {
+      this.inputElement.focus();
+    } else {
+      throw new Error(
+        "No child element found. Please insert an HTMLInputElement as child of the HugoSearchInput component"
+      );
+    }
     queryStore.subscribe(this.onQueryChange);
 
     this.inputElement.addEventListener("keypress", function (event) {
