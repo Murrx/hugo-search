@@ -1,11 +1,11 @@
 import { queryStore, resultsStore } from "../CompositionRoot";
 import { QueryData, Store } from "../types/SearchStore.type";
+import * as params from "@params";
 
 // todo: make messages configurable
-const welcomeMsg =
-  "Welcome to Search-Salone. Please use the search box to find what you are looking for";
-const emptyResultsMsg = "No results found... Please search for something else";
-const successMsg = "Search Salone proudly presents you these results";
+const welcomeMsg = "default welcome message";
+const emptyResultsMsg = "default message for no results";
+const successMsg = "default success message";
 
 export default class ResultCard extends HTMLElement {
   private _template = document.createElement("template");

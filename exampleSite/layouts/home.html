@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>{{ .Site.Title }}</title>
+    {{ $opts := dict "target" "es2017" }}
+    <!-- -->
+    {{ $built := resources.Get "js/hugoSearch/main.ts" | js.Build $opts }}
+    <script
+      type="text/javascript"
+      src="{{ $built.RelPermalink }}"
+      defer
+    ></script>
+  </head>
+
+  <body>
+    <header class="main-header">
+      <a href="/" id="logo">Hugo Search</a>
+    </header>
+    <hs-message></hs-message>
+  </body>
+</html>

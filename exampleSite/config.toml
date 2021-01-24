@@ -1,0 +1,11 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+
+[[module.imports]]
+    path = "github.com/murrx/hugo-search"
+    disabled = false
+
+    [[module.imports.mounts]]
+    source = "assets/hugoSearch"
+    target = "assets/js/hugoSearch"

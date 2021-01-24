@@ -31,7 +31,12 @@ export class LunrSearchProvider {
   async initialize(): Promise<void> {
     // todo: make the json file configurable
     const res = await fetch("/entities/index.json");
-    this.searchData = await res.json();
+    if (res.status == 404) {
+      console.log("/entities/index.json not found");
+      this.searchData = [];
+    } else {
+      this.searchData = await res.json();
+    }
     this.config(this.searchData);
     this.isInitialized = true;
   }
