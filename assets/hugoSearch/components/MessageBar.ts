@@ -2,10 +2,9 @@ import { queryStore, resultsStore } from "../CompositionRoot";
 import { QueryData, Store } from "../types/SearchStore.type";
 import * as params from "@params";
 
-// todo: make messages configurable
-const welcomeMsg = "default welcome message";
-const emptyResultsMsg = "default message for no results";
-const successMsg = "default success message";
+const welcomeMsg = params.messages.welcome;
+const emptyResultsMsg = params.messages.noResults;
+const successMsg = params.messages.success;
 
 export default class ResultCard extends HTMLElement {
   private _template = document.createElement("template");
