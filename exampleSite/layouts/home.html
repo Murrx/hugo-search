@@ -5,16 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{{ .Site.Title }}</title>
-    {{ $params := dict "messages" (.Param "hugoSearch.messages")}}
-    <!---->
-    {{ $opts := dict "target" "es2017" "params" $params }}
-    <!-- -->
-    {{ $built := resources.Get "js/hugoSearch/main.ts" | js.Build $opts }}
-    <script
-      type="text/javascript"
-      src="{{ $built.RelPermalink }}"
-      defer
-    ></script>
+    {{ partial "hugoSearch/buildJs.gohtml" . }}
   </head>
 
   <body>

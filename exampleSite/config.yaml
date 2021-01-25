@@ -8,5 +8,7 @@ module:
     disabled: false
 
     mounts:
-      source: "assets/hugoSearch"
-      target: "assets/js/hugoSearch"
+      - source: "assets/hugoSearch"
+        target: "assets/js/hugoSearch"
+      - source: "layouts/partials"
+        target: "layouts/partials"
