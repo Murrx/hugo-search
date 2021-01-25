@@ -3,10 +3,9 @@ import {
   requestQueryStore,
   requestResultsStore,
 } from "../eventHelper";
-import { messages } from "../HugoConfig";
 import { QueryData, Store } from "../types/SearchStore.type";
 
-export default class ResultCard extends HTMLElement {
+export default class MessageBar extends HTMLElement {
   private messages;
   private _template = document.createElement("template");
   private queryStore: Store<string>;
@@ -40,15 +39,15 @@ export default class ResultCard extends HTMLElement {
 
   constructor() {
     super();
-    this.messages = requestMessagesConfig();
-    this.queryStore = requestQueryStore();
-    this.resultsStore = requestResultsStore();
-
-    this.message = messages.welcomeMsg;
+    this.message = "";
     this._template.innerHTML = `<p id="message">${this.message}</p>`;
   }
 
   connectedCallback() {
+    this.messages = requestMessagesConfig(this);
+    this.queryStore = requestQueryStore(this);
+    this.resultsStore = requestResultsStore(this);
+
     this.appendChild(this._template.content.cloneNode(true));
     this.queryStore.subscribe(this.onQueryChange);
     this.resultsStore.subscribe(this.onResultsChange);

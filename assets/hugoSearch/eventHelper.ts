@@ -5,22 +5,22 @@ import {
   Store,
 } from "./types/SearchStore.type";
 
-export function requestMessagesConfig(this: any): MessagesConfig {
+export function requestMessagesConfig(element: HTMLElement): MessagesConfig {
   const event = new RequestInstanceEvent<MessagesConfig>("MessagesConfig");
-  this.dispatchEvent(event);
+  element.dispatchEvent(event);
   return event.detail.instance;
 }
 
-export function requestQueryStore(this: any): Store<string> {
+export function requestQueryStore(element: HTMLElement): Store<string> {
   const event = new RequestInstanceEvent<Store<string>>("Store<string>");
-  this.dispatchEvent(event);
+  element.dispatchEvent(event);
   return event.detail.instance;
 }
 
-export function requestResultsStore(this: any): Store<QueryData[]> {
+export function requestResultsStore(element: HTMLElement): Store<QueryData[]> {
   const event = new RequestInstanceEvent<Store<QueryData[]>>(
     "Store<QueryData[]>"
   );
-  this.dispatchEvent(event);
+  element.dispatchEvent(event);
   return event.detail.instance;
 }

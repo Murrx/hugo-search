@@ -16,8 +16,8 @@ export const searchProvider = new LunrSearchProvider(resultsStore, queryStore);
 export const queryParamController = new QueryParamController(queryStore);
 
 window.addEventListener("MessagesConfig", (e: Event) => {
-  let MessagesConfigEvent = e as RequestInstanceEvent<MessagesConfig>;
-  MessagesConfigEvent.detail.instance = messages;
+  let messagesConfigEvent = e as RequestInstanceEvent<MessagesConfig>;
+  messagesConfigEvent.detail.instance = messages;
 });
 
 window.addEventListener("Store<string>", (e: Event) => {
