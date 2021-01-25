@@ -1,0 +1,6 @@
+params:
+  hugoSearch:
+    messages:
+      welcome: default welcome message. Configure me by setting params.hugoSearch.messages.welcome
+      noResults: default empty results message. Configure me by setting params.hugoSearch.messages.noResults
+      success: default success message. Configure me by setting params.hugoSearch.messages.success
