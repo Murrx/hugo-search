@@ -17,3 +17,21 @@ export interface QueryData {
 export interface Store<T> extends Subscribable<T> {
   value: T;
 }
+
+export class RequestInstanceEvent<T> extends CustomEvent<{
+  type: string;
+  instance: T | undefined;
+}> {
+  constructor(type: string) {
+    super(type, {
+      bubbles: true,
+      detail: { type, instance: undefined },
+    });
+  }
+}
+
+export type MessagesConfig = {
+  welcomeMsg: string;
+  emptyResultsMsg: string;
+  successMsg: string;
+};
