@@ -13,6 +13,16 @@
       <a href="/" id="logo">Hugo Search</a>
     </header>
     <hs-message></hs-message>
-    <hs-results></hs-results>
+    <hs-results class="search-results">
+      <template>
+        <a href="${uri}">
+          <div class="search-result">
+            <h2>name: ${name}</h2>
+            <h3>category: ${category}</h3>
+            <p>sub cat: ${sub_category}</p>
+          </div>
+        </a>
+      </template>
+    </hs-results>
   </body>
 </html>
