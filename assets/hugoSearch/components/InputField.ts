@@ -1,10 +1,11 @@
-import { queryStore } from "../CompositionRoot";
-import { InputController } from "../types/SearchStore.type";
+import { requestQueryStore } from "../eventHelper";
+import { InputController, Store } from "../types/SearchStore.type";
 
 export default class HugoSearchInput
   extends HTMLElement
   implements InputController {
-  inputElement!: HTMLInputElement;
+  private inputElement!: HTMLInputElement;
+  private queryStore: Store<string>;
 
   constructor() {
     super();
@@ -24,7 +25,7 @@ export default class HugoSearchInput
   };
 
   connectedCallback() {
-    // todo: this needs IOC
+    this.queryStore = requestQueryStore(this);
     this.inputElement = this.firstElementChild as HTMLInputElement;
     if (this.inputElement) {
       this.inputElement.focus();
@@ -33,13 +34,16 @@ export default class HugoSearchInput
         "No child element found. Please insert an HTMLInputElement as child of the HugoSearchInput component"
       );
     }
-    queryStore.subscribe(this.onQueryChange);
+    this.queryStore.subscribe(this.onQueryChange);
 
-    this.inputElement.addEventListener("keypress", function (event) {
-      if (event.key === "Enter") {
-        // todo: this needs IOC
-        queryStore.value = this.value;
-      }
-    });
+    this.inputElement.addEventListener(
+      "keypress",
+      function (event) {
+        if (event.key === "Enter") {
+          // todo: this needs IOC
+          this.queryStore.value = this.value;
+        }
+      }.bind(this)
+    );
   }
 }
