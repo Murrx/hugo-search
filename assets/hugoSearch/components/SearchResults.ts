@@ -1,4 +1,4 @@
-import { resultsStore } from "../CompositionRoot";
+import { requestResultsStore } from "../eventHelper";
 import { QueryData } from "../types/SearchStore.type";
 import ResultCard from "./ResultCard";
 
@@ -7,9 +7,9 @@ export default class SearchResults extends HTMLElement {
 
   constructor() {
     super();
-    this.classList.add("search-results");
   }
   connectedCallback() {
+    let resultsStore = requestResultsStore(this);
     resultsStore.subscribe(this.onResultsChange);
     this.appendChild(this._template.content.cloneNode(true));
   }
