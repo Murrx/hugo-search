@@ -1,10 +1,10 @@
 import { StoreFactory } from "../store";
 import {
-  MessagesConfig,
-  QueryData,
-  RequestInstanceEvent,
-  Store,
-} from "../types/SearchStore.type";
+  injectMessagesConfig,
+  injectQueryStore,
+  injectResultsStore,
+} from "../testHelpers/Dependecies";
+import { MessagesConfig, QueryData, Store } from "../types/SearchStore.type";
 import MessageBar from "./MessageBar";
 
 describe("MessageBar", () => {
@@ -22,21 +22,9 @@ describe("MessageBar", () => {
     };
     queryStore = StoreFactory.create<string>("");
     resultsStore = StoreFactory.create<QueryData[]>([]);
-
-    window.addEventListener("MessagesConfig", (e: Event) => {
-      let messagesConfigEvent = e as RequestInstanceEvent<MessagesConfig>;
-      messagesConfigEvent.detail.instance = messages;
-    });
-
-    window.addEventListener("Store<string>", (e: Event) => {
-      let queryStoreEvent = e as RequestInstanceEvent<Store<string>>;
-      queryStoreEvent.detail.instance = queryStore;
-    });
-
-    window.addEventListener("Store<QueryData[]>", (e: Event) => {
-      let resultsStoreEvent = e as RequestInstanceEvent<Store<QueryData[]>>;
-      resultsStoreEvent.detail.instance = resultsStore;
-    });
+    injectMessagesConfig(messages);
+    injectQueryStore(queryStore);
+    injectResultsStore(resultsStore);
 
     element = document.createElement("hs-message");
     document.body.appendChild(element);

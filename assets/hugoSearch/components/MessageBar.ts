@@ -3,17 +3,16 @@ import {
   requestQueryStore,
   requestResultsStore,
 } from "../eventHelper";
-import { QueryData, Store } from "../types/SearchStore.type";
+import { MessagesConfig, QueryData, Store } from "../types/SearchStore.type";
 
 export default class MessageBar extends HTMLElement {
-  private messages;
+  private messages: MessagesConfig;
   private _template = document.createElement("template");
   private queryStore: Store<string>;
   private resultsStore: Store<QueryData[]>;
   private query: string = "";
   private results: QueryData[] = [];
-
-  private message;
+  private message: string;
 
   onQueryChange = (query: string) => {
     this.query = query;
