@@ -12,8 +12,10 @@ class AbstractStore<T> implements Store<T> {
     return this._value;
   }
   public set value(newValue: T) {
-    this._value = newValue;
-    this.emit(newValue);
+    if (this._value !== newValue) {
+      this._value = newValue;
+      this.emit(newValue);
+    }
   }
 
   constructor(value: T) {

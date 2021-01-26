@@ -12,7 +12,10 @@ defineFeature(storeFeature, (test) => {
 
   const givenAnInstanceOfLunrSearchProvider = (given: any) => {
     given("an instance of LunrSearchProvider", () => {
-      provider = new LunrSearchProvider(resultsStore, queryStore);
+      provider = new LunrSearchProvider(resultsStore, queryStore, [
+        "title",
+        "description",
+      ]);
       provider.index.search = jest.fn();
       provider.initialize = jest.fn();
     });

@@ -5,15 +5,21 @@ export class LunrSearchProvider {
   private searchStore: Store<QueryData[]>;
   private queryStore: Store<string>;
   private isInitialized: boolean = false;
+  private searchFieds: string[];
 
   // todo: see if we can use lunr.Index Build or Load.
-  // todo: this should be private
+  // todo: should be private
   public index: lunr.Index;
   // todo: rename type QueryData to HugoSearchData
   private searchData: QueryData[];
   private queryDataMap: Map<string, QueryData>;
 
-  constructor(searchStore: Store<QueryData[]>, queryStore: Store<string>) {
+  constructor(
+    searchStore: Store<QueryData[]>,
+    queryStore: Store<string>,
+    searchFields: string[]
+  ) {
+    this.searchFieds = searchFields;
     this.queryStore = queryStore;
     this.queryStore.subscribe(this.onQueryChange);
     this.searchStore = searchStore;
@@ -28,9 +34,9 @@ export class LunrSearchProvider {
   };
 
   // todo: should be private
-  async initialize(): Promise<void> {
+  public async initialize(): Promise<void> {
     // todo: make the json file configurable
-    const res = await fetch("/entities/index.json");
+    const res = await fetch("/posts/index.json");
     if (res.status == 404) {
       console.log("/entities/index.json not found");
       this.searchData = [];
@@ -48,7 +54,7 @@ export class LunrSearchProvider {
     }
     if (query) {
       let result = [...new Set(this.index.search(query))];
-      this.searchStore.value = result.map((r) => this.queryDataMap.get(r.ref)!);
+      this.searchStore.value = result.map((r) => this.queryDataMap.get(r.ref));
     } else {
       this.searchStore.value = [];
     }
@@ -58,12 +64,12 @@ export class LunrSearchProvider {
     this.searchData = data;
     this.queryDataMap = new Map(data.map((key) => [key.uri, key]));
     // should use IOC to remove this dependency on lunr
+    let searchFields = this.searchFieds;
     this.index = lunr(function () {
       this.ref("uri");
-      this.field("category");
-      this.field("name");
-      this.field("sub_category");
-      this.field("location");
+      searchFields.forEach((field: string) => {
+        this.field(field);
+      }, this);
       data.forEach((d) => {
         this.add(d);
       }, this);

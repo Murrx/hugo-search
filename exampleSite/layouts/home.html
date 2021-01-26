@@ -20,9 +20,10 @@
       <template>
         <a href="${uri}">
           <div class="search-result">
-            <h2>name: ${name}</h2>
-            <h3>category: ${category}</h3>
-            <p>sub cat: ${sub_category}</p>
+            <!-- use partial to render template tags with compile time error handling -->
+            <h2>name: ${title}</h2>
+            <h3>description: ${description}</h3>
+            ${test}
           </div>
         </a>
       </template>

@@ -8,3 +8,5 @@ export const messages: MessagesConfig = {
   emptyResultsMsg: params.messages.empty,
   successMsg: params.messages.success,
 };
+
+export const searchFields: string[] = params.fields;

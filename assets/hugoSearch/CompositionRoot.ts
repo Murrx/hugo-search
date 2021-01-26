@@ -1,7 +1,7 @@
 import { LunrSearchProvider } from "./LunrSearchProvider";
 import { QueryParamController } from "./QueryParamController";
 import { StoreFactory } from "./store";
-import { messages } from "./HugoConfig";
+import { messages, searchFields } from "./HugoConfig";
 import {
   MessagesConfig,
   QueryData,
@@ -12,7 +12,11 @@ import {
 export const resultsStore = StoreFactory.create<QueryData[]>([]);
 export const queryStore = StoreFactory.create<string>("");
 
-export const searchProvider = new LunrSearchProvider(resultsStore, queryStore);
+export const searchProvider = new LunrSearchProvider(
+  resultsStore,
+  queryStore,
+  searchFields
+);
 export const queryParamController = new QueryParamController(queryStore);
 
 window.addEventListener("MessagesConfig", (e: Event) => {

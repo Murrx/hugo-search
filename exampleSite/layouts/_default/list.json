@@ -1,0 +1,6 @@
+[
+    {{ range $index, $e := .Data.Pages }}
+    {{ if $index }}, {{ end }}{{ .Render }}
+    {{ end }}
+]
+  

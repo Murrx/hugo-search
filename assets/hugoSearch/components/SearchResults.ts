@@ -18,10 +18,10 @@ export default class SearchResults extends HTMLElement {
     this.parseTemplate(template.innerHTML);
     let resultsStore = requestResultsStore(this);
     resultsStore.subscribe(this.onResultsChange);
-    this.appendChild(this._templateElement.content.cloneNode(true));
   }
 
   onResultsChange = (data: QueryData[]) => {
+    // todo: figure out why results change twice, on initial pageload
     this.render(data);
   };
 
@@ -31,6 +31,10 @@ export default class SearchResults extends HTMLElement {
         return this.renderFromTemplate(result);
       }, this)
       .join("");
+    while (this.firstChild) {
+      this.removeChild(this.lastChild);
+    }
+    this.appendChild(this._templateElement.content);
   }
 
   parseTemplate(str: string) {

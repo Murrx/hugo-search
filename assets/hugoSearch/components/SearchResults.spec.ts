@@ -22,9 +22,7 @@ describe("SearchResults component", () => {
 
   describe("rendering results", () => {
     test("is empty when there are no results", () => {
-      expect(
-        element.getElementsByTagName("template")[0].childElementCount
-      ).toBe(0);
+      expect(element.childElementCount).toBe(0);
     });
     test("renders a resultsCard for each result", () => {
       resultsStore.value = [
@@ -38,9 +36,7 @@ describe("SearchResults component", () => {
         },
       ];
       // todo: make this test more resilient
-      expect(element.getElementsByTagName("template")[0].innerHTML.trim()).toBe(
-        "<p>test</p>"
-      );
+      expect(element.innerHTML.trim()).toBe("<p>test</p>");
     });
   });
 });
