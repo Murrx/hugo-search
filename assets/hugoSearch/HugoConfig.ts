@@ -5,6 +5,6 @@ import * as params from "@params";
 
 export const messages: MessagesConfig = {
   welcomeMsg: params.messages.welcome,
-  emptyResultsMsg: params.messages.noResults,
+  emptyResultsMsg: params.messages.empty,
   successMsg: params.messages.success,
 };
