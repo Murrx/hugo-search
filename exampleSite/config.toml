@@ -1,0 +1,24 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Hugo Search"
+
+[module]
+[[module.imports]]
+path = "github.com/murrx/hugo-search"
+disabled = false
+
+[[module.imports.mounts]]
+source = "assets/hugoSearch"
+target = "assets/js/hugoSearch"
+
+[[module.imports.mounts]]
+source = "layouts/partials"
+target = "layouts/partials"
+
+[outputs]
+page = ["html", "json"]
+section = ["html", "json"]
+
+[params]
+[params.searchfields]
+posts = ["title", "description"]
