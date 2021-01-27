@@ -9,4 +9,6 @@ export const messages: MessagesConfig = {
   successMsg: params.messages.success,
 };
 
+export const searchCollection: string = params.collection;
+
 export const searchFields: string[] = params.fields;

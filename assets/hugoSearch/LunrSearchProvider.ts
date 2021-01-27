@@ -1,4 +1,5 @@
 import lunr from "lunr";
+import { searchCollection } from "./HugoConfig";
 import { QueryData, Store } from "./types/SearchStore.type";
 
 export class LunrSearchProvider {
@@ -36,7 +37,7 @@ export class LunrSearchProvider {
   // todo: should be private
   public async initialize(): Promise<void> {
     // todo: make the json file configurable
-    const res = await fetch("/posts/index.json");
+    const res = await fetch(`/${searchCollection}/index.json`);
     if (res.status == 404) {
       console.log("/entities/index.json not found");
       this.searchData = [];
