@@ -7,16 +7,19 @@ describe("InputField", () => {
   window.customElements.define("hs-input", InputField);
   let element: HTMLElement;
   let queryStore: Store<string>;
+  let input: HTMLInputElement;
 
   beforeEach(() => {
     queryStore = StoreFactory.create<string>("");
     element = document.createElement("hs-input");
-    element.innerHTML = `<input></input>`;
+    input = document.createElement("input");
+    element.appendChild(input);
     injectQueryStore(queryStore);
     document.body.appendChild(element);
   });
 
-  test("basic", () => {
-    expect(1).toBe(1);
+  it("sets its value when the value of the querystore changes", () => {
+    queryStore.value = "newValue";
+    expect(input.value).toBe("newValue");
   });
 });
