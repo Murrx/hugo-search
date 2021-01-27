@@ -1,5 +1,5 @@
 {
-  {{ range $param := .Param "searchfields.posts"}}
+  {{ range $param := .Param "searchfields.home"}}
   "{{ $param }}": "{{ $.Param $param }}",
   {{ end }}
   "uri": "{{ .RelPermalink }}"

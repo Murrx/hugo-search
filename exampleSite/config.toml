@@ -21,4 +21,4 @@ section = ["html", "json"]
 
 [params]
 [params.searchfields]
-posts = ["title", "description"]
+home = ["title", "description"]
