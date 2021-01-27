@@ -38,9 +38,8 @@ export default class HugoSearchInput
 
     this.inputElement.addEventListener(
       "keypress",
-      function (event) {
+      function (event: { key: string }) {
         if (event.key === "Enter") {
-          // todo: this needs IOC
           this.queryStore.value = this.value;
         }
       }.bind(this)
