@@ -2,3 +2,11 @@
 [module.hugoVersion]
 extended = false
 min = "0.78.0"
+
+[params.search]
+fields = ["title", "description"]
+collection = "posts"
+[params.search.messages]
+welcome = "default welcome message."
+empty = "default empty results message."
+success = "default success message."

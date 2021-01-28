@@ -1,3 +1,15 @@
 {{ $opts := dict "target" "es2017" }}
 {{ $built := resources.Get "js/hugoSearch/main.ts" | js.Build $opts }}
-<script type="text/javascript" src="{{ $built.RelPermalink }}" defer></script>
+<script type="text/javascript" src="{{ $built.RelPermalink }}">
+</script>
+<script>
+  HugoSearch.init({
+    collection: {{ .Param "search.collection" }}, 
+    fields: {{ .Param "search.fields" }},
+    messages:{
+      welcomeMsg: {{ .Param "search.messages.welcome"}},
+      emptyResultsMsg: {{ .Param "search.messages.empty"}},
+      successMsg: {{ .Param "search.messages.success"}},
+    }
+  });
+</script>
