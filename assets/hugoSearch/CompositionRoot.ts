@@ -1,7 +1,6 @@
 import { LunrSearchProvider } from "./LunrSearchProvider";
 import { QueryParamController } from "./QueryParamController";
 import { StoreFactory } from "./store";
-import { messages } from "./HugoConfig";
 import {
   MessagesConfig,
   QueryData,
@@ -23,6 +22,14 @@ export const queryParamController = new QueryParamController(queryStore);
 
 window.addEventListener("MessagesConfig", (e: Event) => {
   let messagesConfigEvent = e as RequestInstanceEvent<MessagesConfig>;
+  let messages = {
+    welcomeMsg:
+      "default welcome message. Configure me by setting params.hugoSearch.messages.welcome",
+    emptyResultsMsg:
+      "default empty results message. Configure me by setting params.hugoSearch.messages.noResults",
+    successMsg:
+      "default success message. Configure me by setting params.hugoSearch.messages.success",
+  };
   messagesConfigEvent.detail.instance = messages;
 });
 
