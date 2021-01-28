@@ -1,6 +1,4 @@
-import { queryParamController } from "./CompositionRoot";
 import { InputController, Store } from "./types/SearchStore.type";
-
 export class QueryParamController implements InputController {
   private queryStore: Store<string>;
 
@@ -11,10 +9,10 @@ export class QueryParamController implements InputController {
     if (this.value) {
       this.queryStore.value = this.value;
     }
+
     window.onpopstate = function () {
-      // todo: test -> when changing state from a query to an empty query there should be no results
-      queryParamController.value = queryParamController.queryParam;
-    };
+      this.value = this.queryParam;
+    }.bind(this);
   }
 
   set value(value: string) {

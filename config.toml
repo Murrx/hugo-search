@@ -1,11 +1,12 @@
-[params]
-[params.hugoSearch]
-[params.hugoSearch.Messages]
-welcome= "default welcome message. Configure me by setting params.hugoSearch.messages.welcome"
-empty= "default empty results message. Configure me by setting params.hugoSearch.messages.noResults"
-success= "default success message. Configure me by setting params.hugoSearch.messages.success"
-
 [module]
 [module.hugoVersion]
 extended = false
 min = "0.78.0"
+
+[params.search]
+fields = ["title", "description"]
+collection = "posts"
+[params.search.messages]
+welcome = "default welcome message."
+empty = "default empty results message."
+success = "default success message."

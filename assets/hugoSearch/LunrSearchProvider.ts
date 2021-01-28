@@ -1,5 +1,4 @@
 import lunr from "lunr";
-import { searchCollection } from "./HugoConfig";
 import { QueryData, Store } from "./types/SearchStore.type";
 
 export class LunrSearchProvider {
@@ -14,12 +13,15 @@ export class LunrSearchProvider {
   // todo: rename type QueryData to HugoSearchData
   private searchData: QueryData[];
   private queryDataMap: Map<string, QueryData>;
+  private searchCollection: string;
 
   constructor(
     searchStore: Store<QueryData[]>,
     queryStore: Store<string>,
-    searchFields: string[]
+    searchFields: string[],
+    searchCollection: string
   ) {
+    this.searchCollection = searchCollection;
     this.searchFieds = searchFields;
     this.queryStore = queryStore;
     this.queryStore.subscribe(this.onQueryChange);
@@ -36,10 +38,9 @@ export class LunrSearchProvider {
 
   // todo: should be private
   public async initialize(): Promise<void> {
-    // todo: make the json file configurable
-    const res = await fetch(`/${searchCollection}/index.json`);
+    const res = await fetch(`/${this.searchCollection}/index.json`);
     if (res.status == 404) {
-      console.log("/entities/index.json not found");
+      console.log(`/${this.searchCollection}/index.json not found`);
       this.searchData = [];
     } else {
       this.searchData = await res.json();

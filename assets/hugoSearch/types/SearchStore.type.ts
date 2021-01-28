@@ -35,3 +35,8 @@ export type MessagesConfig = {
   emptyResultsMsg: string;
   successMsg: string;
 };
+export type HugoSearchConfig = {
+  collection: string;
+  fields: string[];
+  messages: MessagesConfig;
+};
