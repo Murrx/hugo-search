@@ -19,6 +19,8 @@ target = "layouts/partials"
 page = ["html", "json"]
 section = ["html", "json"]
 
+# todo: this currently needs to be set in order to configure json generation.
+#       do we want to keep this or find another implementation?
 [params]
 [params.searchfields]
 home = ["title", "description"]

@@ -1,7 +1,7 @@
 import { LunrSearchProvider } from "./LunrSearchProvider";
 import { QueryParamController } from "./QueryParamController";
 import { StoreFactory } from "./store";
-import { messages, searchFields } from "./HugoConfig";
+import { messages } from "./HugoConfig";
 import {
   MessagesConfig,
   QueryData,
@@ -15,8 +15,8 @@ export const queryStore = StoreFactory.create<string>("");
 export const searchProvider = new LunrSearchProvider(
   resultsStore,
   queryStore,
-  searchFields,
   // todo: this should be configurable
+  ["title", "description"],
   "posts"
 );
 export const queryParamController = new QueryParamController(queryStore);
