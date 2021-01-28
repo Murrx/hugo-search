@@ -15,7 +15,9 @@ export const queryStore = StoreFactory.create<string>("");
 export const searchProvider = new LunrSearchProvider(
   resultsStore,
   queryStore,
-  searchFields
+  searchFields,
+  // todo: this should be configurable
+  "posts"
 );
 export const queryParamController = new QueryParamController(queryStore);
 

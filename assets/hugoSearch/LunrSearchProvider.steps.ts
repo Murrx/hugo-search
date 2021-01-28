@@ -6,10 +6,12 @@ describe("Store", () => {
   let queryStore = { value: "", subscribe: jest.fn() };
 
   beforeEach(() => {
-    provider = new LunrSearchProvider(resultsStore, queryStore, [
-      "title",
-      "description",
-    ]);
+    provider = new LunrSearchProvider(
+      resultsStore,
+      queryStore,
+      ["title", "description"],
+      "posts"
+    );
     provider.index.search = jest.fn();
     provider.initialize = jest.fn();
   });

@@ -1,5 +1,5 @@
 {{/* todo: this needs further configuration, since searchfields.home should be a dynamic value*/}}
-{{ $params := dict "messages" (.Param "hugoSearch.messages") "fields" (.Param "searchfields.home") "collection" (.Scratch.Get "collection")}}
+{{ $params := dict "messages" (.Param "hugoSearch.messages") "fields" (.Param "searchfields.home")}}
 {{ $opts := dict "target" "es2017" "params" $params }}
 {{ $built := resources.Get "js/hugoSearch/main.ts" | js.Build $opts }}
 <script type="text/javascript" src="{{ $built.RelPermalink }}" defer></script>
