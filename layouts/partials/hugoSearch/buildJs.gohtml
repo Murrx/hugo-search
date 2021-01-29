@@ -1,7 +1,11 @@
-{{ $opts := dict "target" "es2017" }}
-{{ $built := resources.Get "js/hugoSearch/main.ts" | js.Build $opts }}
-<script type="text/javascript" src="{{ $built.RelPermalink }}">
-</script>
+{{ if (eq .Hugo.Environment "development") }}
+  {{ .Scratch.Set "opts" (dict "target" "es2017" "sourcemap" "inline") }}
+{{ else }}
+  {{ .Scratch.Set "opts" (dict "target" "es2017" "minify" "true") }}
+{{ end }}
+
+{{ $built := resources.Get "js/hugoSearch/main.ts" | js.Build (.Scratch.Get "opts") }}
+<script type="text/javascript" src="{{ $built.RelPermalink }}"></script>
 <script>
   HugoSearch.init({
     collection: {{ .Param "search.collection" }}, 
