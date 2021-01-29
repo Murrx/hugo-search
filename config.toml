@@ -3,8 +3,10 @@
 extended = false
 min = "0.78.0"
 
+[params.search.fields]
+posts = ["title", "description"]
+actors = ["name", "birthplace", "birthdate"]
 [params.search]
-fields = ["title", "description"]
 collection = "posts"
 [params.search.messages]
 welcome = "default welcome message."

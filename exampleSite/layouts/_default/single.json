@@ -1,5 +1,5 @@
 {
-  {{ range $param := .Param "search.fields"}}
+  {{ range $param := .Param (delimit (slice ("search.fields") (.Type)) ".") }}
   "{{ $param }}": "{{ $.Param $param }}",
   {{ end }}
   "uri": "{{ .RelPermalink }}"
