@@ -1,6 +1,10 @@
 baseURL = "http://example.org/"
 languageCode = "en-us"
 title = "Hugo Search"
+theme = "etch"
+
+[params]
+mainSections = ["actors"]
 
 [module]
 [[module.imports]]

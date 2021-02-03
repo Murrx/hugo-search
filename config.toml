@@ -5,9 +5,9 @@ min = "0.78.0"
 
 [params.search.fields]
 posts = ["title", "description"]
-actors = ["name", "birthplace", "birthdate"]
+actors = ["name", "title", "description"]
 [params.search]
-collection = "posts"
+collection = "actors"
 [params.search.messages]
 welcome = "default welcome message."
 empty = "default empty results message."

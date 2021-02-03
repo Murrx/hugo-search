@@ -1,0 +1,9 @@
+{{ define "main" }}
+{{ partial "hugoSearch/buildJs.gohtml" . }}
+{{ .Content }}
+<hs-input>
+  <input type="text"></input>
+</hs-input>
+<hs-message></hs-message>
+{{- partial "posts.html" . -}}
+{{ end }}
