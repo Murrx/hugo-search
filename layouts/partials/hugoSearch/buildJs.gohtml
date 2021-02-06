@@ -13,7 +13,11 @@
     {{ else }}
         collection: {{ .Type }}, 
     {{ end }}
-    fields: {{ .Param "search.fields" }},
+    {{ with .Param "search.fields" }}
+      fields: {{ . }},
+    {{ else }}
+      fields: ["title", "description"],
+    {{ end }}
     messages:{
       welcomeMsg: {{ .Param "search.messages.welcome"}},
       emptyResultsMsg: {{ .Param "search.messages.empty"}},

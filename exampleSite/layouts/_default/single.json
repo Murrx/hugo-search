@@ -1,6 +1,11 @@
 {
-  {{ range $param := .Param (delimit (slice ("search.fields") (.Type)) ".") }}
-  "{{ $param }}": "{{ $.Param $param }}",
+  {{ with .CurrentSection.Param "search.fields"}}
+    {{ range $param := . }}
+      "{{ $param }}": "{{ $.Param $param }}",
+    {{ end }}
+  {{ else }}
+    "title": "{{ $.Param "title" }}",
+    "description": "{{ $.Param "description" }}",
   {{ end }}
   "uri": "{{ .RelPermalink }}"
 }

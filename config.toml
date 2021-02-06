@@ -3,14 +3,6 @@
 extended = false
 min = "0.78.0"
 
-# todo: figure out how to configure this in a nice way?
-#       we can always assume a description and title. Maybe we
-#       can make the rest configurable via params
-
-[params.search.fields]
-posts = ["title", "description"]
-actors = ["name", "title", "description"]
-
 [params.search.messages]
 welcome = "default welcome message."
 empty = "default empty results message."

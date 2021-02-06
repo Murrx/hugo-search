@@ -67,10 +67,9 @@ export class LunrSearchProvider {
     this.queryDataMap = new Map(data.map((key) => [key.uri, key]));
     // should use IOC to remove this dependency on lunr
     let searchFields = this.searchFieds;
-    let searchCollection = this.searchCollection;
     this.index = lunr(function () {
       this.ref("uri");
-      searchFields[searchCollection].forEach((field: string) => {
+      searchFields.forEach((field: string) => {
         this.field(field);
       }, this);
       data.forEach((d) => {
