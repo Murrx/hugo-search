@@ -8,7 +8,11 @@
 <script type="text/javascript" src="{{ $built.RelPermalink }}"></script>
 <script>
   HugoSearch.init({
-    collection: {{ .Param "search.collection" }}, 
+    {{ with .Param "search.collection" }}
+        collection: {{ . }}, 
+    {{ else }}
+        collection: {{ .Type }}, 
+    {{ end }}
     fields: {{ .Param "search.fields" }},
     messages:{
       welcomeMsg: {{ .Param "search.messages.welcome"}},
