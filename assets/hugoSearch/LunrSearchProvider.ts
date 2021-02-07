@@ -13,23 +13,24 @@ export class LunrSearchProvider {
   // todo: rename type QueryData to HugoSearchData
   private searchData: QueryData[];
   private queryDataMap: Map<string, QueryData>;
-  private searchCollection: string;
+  private searchSections: string[];
 
   constructor(
     searchStore: Store<QueryData[]>,
     queryStore: Store<string>,
     searchFields: string[],
-    searchCollection: string
+    searchSections: string[]
   ) {
-    this.searchCollection = searchCollection;
+    this.searchSections = searchSections;
     this.searchFieds = searchFields;
     this.queryStore = queryStore;
-    this.queryStore.subscribe(this.onQueryChange);
     this.searchStore = searchStore;
     // todo: find cleaner way to initialize lunr
     this.index = lunr(function () {});
     this.searchData = [];
     this.queryDataMap = new Map<string, QueryData>();
+
+    this.queryStore.subscribe(this.onQueryChange);
   }
 
   onQueryChange = (query: string) => {
@@ -37,24 +38,34 @@ export class LunrSearchProvider {
   };
 
   // todo: should be private
-  public async initialize(): Promise<void> {
-    const res = await fetch(`/${this.searchCollection}/index.json`);
-    if (res.status == 404) {
-      console.log(`/${this.searchCollection}/index.json not found`);
-      this.searchData = [];
-    } else {
-      this.searchData = await res.json();
-    }
-    this.config(this.searchData);
-    this.isInitialized = true;
+  public initialize(): void {
+    this.searchSections.forEach(async (section) => {
+      const res = await fetch(`/${section}/index.json`);
+      if (res.status == 404) {
+        throw Error(`/${section}/index.json not found`);
+      } else {
+        res
+          .json()
+          .then((data) => {
+            this.searchData = this.searchData.concat(data);
+          })
+          .finally(() => {
+            // todo: config is currently called for each section. It
+            //       should only be called once
+            this.config(this.searchData);
+            this.isInitialized = true;
+          });
+      }
+    });
   }
 
-  async search(query: string): Promise<void> {
+  search(query: string): void {
     // todo: test -> what happens when search gets called when with an empty query?
     if (!this.isInitialized) {
-      await this.initialize();
+      this.initialize();
     }
     if (query) {
+      console.log(`searching for ${query}`);
       let result = [...new Set(this.index.search(query))];
       this.searchStore.value = result.map((r) => this.queryDataMap.get(r.ref));
     } else {

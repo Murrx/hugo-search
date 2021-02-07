@@ -8,10 +8,10 @@
 <script type="text/javascript" src="{{ $built.RelPermalink }}"></script>
 <script>
   HugoSearch.init({
-    {{ with .Param "search.collection" }}
-        collection: {{ . }}, 
+    {{ with .Param "search.sections" }}
+        sections: {{ . }}, 
     {{ else }}
-        collection: {{ .Type }}, 
+        sections: {{ slice .Type }}, 
     {{ end }}
     {{ with .Param "search.fields" }}
       fields: {{ . }},

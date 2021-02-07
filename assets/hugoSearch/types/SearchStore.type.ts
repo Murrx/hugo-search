@@ -36,7 +36,7 @@ export type MessagesConfig = {
   successMsg: string;
 };
 export type HugoSearchConfig = {
-  collection: string;
+  sections: string[];
   fields: string[];
   messages: MessagesConfig;
 };

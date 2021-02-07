@@ -15,9 +15,6 @@ theme = "etch"
     url = "/actors"
     weight = 20
 
-[params]
-mainSections = ["actors"]
-
 [module]
 [[module.imports]]
 path = "github.com/murrx/hugo-search"

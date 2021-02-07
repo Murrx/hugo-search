@@ -18,7 +18,7 @@ export namespace CompositionRoot {
       resultsStore,
       queryStore,
       config.fields,
-      config.collection
+      config.sections
     );
     const queryParamController = new QueryParamController(queryStore);
 
