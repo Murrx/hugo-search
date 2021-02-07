@@ -1,15 +1,19 @@
 baseURL = "http://example.org/"
 languageCode = "en-us"
-title = "Actors"
+title = "Hugo Search Example"
 theme = "etch"
 
 [menu]
   [[menu.main]]
     identifier = "posts"
     name = "posts"
-    title = "posts"
     url = "/posts"
     weight = 10
+  [[menu.main]]
+    identifier = "actors"
+    name = "actors"
+    url = "/actors"
+    weight = 20
 
 [params]
 mainSections = ["actors"]
