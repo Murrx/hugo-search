@@ -18,10 +18,18 @@
     {{ else }}
       fields: ["title", "description"],
     {{ end }}
-    messages:{
-      welcomeMsg: {{ .Param "search.messages.welcome"}},
-      emptyResultsMsg: {{ .Param "search.messages.empty"}},
-      successMsg: {{ .Param "search.messages.success"}},
-    }
+    {{ with .Param "search.messages" }}
+      messages:{
+        welcomeMsg: {{ .Param "search.messages.welcome"}},
+        emptyResultsMsg: {{ .Param "search.messages.empty"}},
+        successMsg: {{ .Param "search.messages.success"}},
+      }
+    {{ else }}
+      messages:{
+        welcomeMsg: "default welcome message.",
+        emptyResultsMsg: "default empty results message.",
+        successMsg: "default success message."
+      }
+    {{ end}}
   });
 </script>
