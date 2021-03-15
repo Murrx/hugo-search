@@ -7,8 +7,15 @@ export default class HugoSearchInput
   private inputElement!: HTMLInputElement;
   private queryStore: Store<string>;
 
+  private _template = document.createElement("template");
+  // todo: maybe provide a default for the slot?
+  private _innerHTML = `<slot name="input"></slot>`;
+
   constructor() {
     super();
+    this._template.innerHTML = this._innerHTML;
+    this.attachShadow({ mode: "open" });
+    this.shadowRoot.appendChild(this._template.content.cloneNode(true));
   }
 
   get value() {
@@ -26,23 +33,21 @@ export default class HugoSearchInput
 
   connectedCallback() {
     this.queryStore = requestQueryStore(this);
-    this.inputElement = this.firstElementChild as HTMLInputElement;
-    if (this.inputElement) {
-      this.inputElement.focus();
-    } else {
-      throw new Error(
-        "No child element found. Please insert an HTMLInputElement as child of the HugoSearchInput component"
-      );
-    }
-    this.queryStore.subscribe(this.onQueryChange);
 
-    this.inputElement.addEventListener(
-      "keypress",
-      function (event: { key: string }) {
-        if (event.key === "Enter") {
-          this.queryStore.value = this.value;
-        }
-      }.bind(this)
-    );
+    this.shadowRoot.addEventListener("slotchange", (event) => {
+      this.inputElement = event.target.assignedElements()[0];
+      if (this.inputElement) {
+        console.log(this.inputElement);
+        this.inputElement.focus();
+      }
+      this.inputElement.addEventListener(
+        "keypress",
+        function (event: { key: string }) {
+          if (event.key === "Enter") {
+            this.queryStore.value = this.value;
+          }
+        }.bind(this)
+      );
+    });
   }
 }

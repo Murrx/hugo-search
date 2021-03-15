@@ -1,7 +1,7 @@
 <h3>Search {{ .Title }}</h3>
 {{ partial "hugoSearch/buildJs.gohtml" . }}
 <hs-input>
-  <input type="text"></input>
+  <input slot="input" type="text"></input>
 </hs-input>
 <hs-message></hs-message>
 <ul id="posts">
