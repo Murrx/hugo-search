@@ -13,9 +13,6 @@ export default class SearchResults extends HTMLElement {
   }
 
   connectedCallback() {
-    // todo: how to handle cases where no template is present?
-    let template = this.getElementsByTagName("template")[0];
-    this.parseTemplate(template.innerHTML);
     let resultsStore = requestResultsStore(this);
     resultsStore.subscribe(this.onResultsChange);
   }
@@ -26,6 +23,10 @@ export default class SearchResults extends HTMLElement {
   };
 
   render(results: QueryData[]) {
+    let template = this.getElementsByTagName("template")[0];
+    if (template) {
+      this.parseTemplate(template.innerHTML);
+    }
     this._templateElement.innerHTML = results
       .map(function (result) {
         return this.renderFromTemplate(result);
