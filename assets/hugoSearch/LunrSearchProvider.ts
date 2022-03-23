@@ -42,7 +42,7 @@ export class LunrSearchProvider {
     this.searchSections.forEach(async (section) => {
       const res = await fetch(`/${section}/index.json`);
       if (res.status == 404) {
-        throw Error(`/${section}/index.json not found`);
+        console.log(`/${section}/index.json not found`);
       } else {
         res
           .json()
