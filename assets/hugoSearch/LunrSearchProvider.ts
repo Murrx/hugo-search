@@ -39,6 +39,7 @@ export class LunrSearchProvider {
 
   // todo: should be private
   public initialize(): void {
+    console.log(this.searchSections);
     this.searchSections.forEach(async (section) => {
       const res = await fetch(`/${section}/index.json`);
       if (res.status == 404) {
