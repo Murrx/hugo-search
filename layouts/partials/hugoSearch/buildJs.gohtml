@@ -18,18 +18,26 @@
     {{ else }}
       fields: ["title", "description"],
     {{ end }}
-    {{ with .Param "search.messages" }}
-      messages:{
+    messages:{
+      {{ if (isset .Params "search.messages.welcome" )}} 
         welcomeMsg: {{ .Param "search.messages.welcome"}},
+      {{ else }}
+        welcomeMsg: "default welcome message",
+      {{ end }}
+      {{ if (isset .Params "search.messages.empty" )}} 
         emptyResultsMsg: {{ .Param "search.messages.empty"}},
+      {{ else }}
+        emptyResultsMsg: "default empty result message",
+      {{ end }}
+      {{ if (isset .Params "search.messages.success" )}} 
         successMsg: {{ .Param "search.messages.success"}},
-      }
-    {{ else }}
-      messages:{
-        welcomeMsg: "default welcome message.",
-        emptyResultsMsg: "default empty results message.",
-        successMsg: "default success message."
-      }
-    {{ end}}
+      {{ else }}
+        successMsg: "default success message",
+
+      {{ end }}
+
+
+
+    }
   });
 </script>
