@@ -5,17 +5,17 @@ import InputField from "./InputField";
 
 describe("InputField", () => {
   window.customElements.define("hs-input", InputField);
-  let element: HTMLElement;
+  let hsInput: HTMLElement;
   let queryStore: Store<string>;
   let input: HTMLInputElement;
 
   beforeEach(() => {
     queryStore = StoreFactory.create<string>("");
-    element = document.createElement("hs-input");
-    input = document.createElement("input");
-    element.appendChild(input);
+    hsInput = document.createElement("hs-input");
+
+    input = hsInput.shadowRoot.firstChild as HTMLInputElement;
     injectQueryStore(queryStore);
-    document.body.appendChild(element);
+    document.body.appendChild(hsInput);
   });
 
   it("sets its value when the value of the querystore changes", () => {
