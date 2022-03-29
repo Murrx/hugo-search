@@ -3,7 +3,8 @@ import { InputController, Store } from "../types/SearchStore.type";
 
 export default class HugoSearchInput
   extends HTMLElement
-  implements InputController {
+  implements InputController
+{
   private inputElement!: HTMLInputElement;
   private queryStore: Store<string>;
 
@@ -16,6 +17,7 @@ export default class HugoSearchInput
     this._template.innerHTML = this._innerHTML;
     this.attachShadow({ mode: "open" });
     this.shadowRoot.appendChild(this._template.content.cloneNode(true));
+    this.inputElement = this.shadowRoot.firstChild as HTMLInputElement;
   }
 
   get value() {
@@ -33,6 +35,7 @@ export default class HugoSearchInput
 
   connectedCallback() {
     this.queryStore = requestQueryStore(this);
+    this.queryStore.subscribe(this.onQueryChange);
 
     this.shadowRoot.addEventListener("slotchange", (event) => {
       this.inputElement = event.target.assignedElements()[0];
