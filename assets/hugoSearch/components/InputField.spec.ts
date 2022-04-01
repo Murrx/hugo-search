@@ -12,8 +12,11 @@ describe("InputField", () => {
   beforeEach(() => {
     queryStore = StoreFactory.create<string>("");
     hsInput = document.createElement("hs-input");
+    input = document.createElement("input");
+    input.slot = "input";
 
-    input = hsInput.shadowRoot.firstChild as HTMLInputElement;
+    hsInput.appendChild(input);
+
     injectQueryStore(queryStore);
     document.body.appendChild(hsInput);
   });

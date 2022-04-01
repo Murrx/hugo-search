@@ -5,26 +5,31 @@ export default class HugoSearchInput
   extends HTMLElement
   implements InputController
 {
-  private inputElement!: HTMLInputElement;
+  private inputElement: HTMLInputElement | null;
   private queryStore: Store<string>;
 
-  private _template = document.createElement("template");
   // todo: maybe provide a default for the slot?
-  private _innerHTML = `<slot name="input"></slot>`;
+  private _template = `<template>
+    <slot name="input"> </slot>
+    <slot name="reset"> </slot>
+  </template>`;
 
   constructor() {
     super();
-    this._template.innerHTML = this._innerHTML;
     this.attachShadow({ mode: "open" });
-    this.shadowRoot.appendChild(this._template.content.cloneNode(true));
-    this.inputElement = this.shadowRoot.firstChild as HTMLInputElement;
+    let template = new DOMParser()
+      .parseFromString(this._template, "text/html")
+      .querySelector("template");
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   get value() {
     return this.inputElement?.value;
   }
   set value(val: string) {
-    this.inputElement.value = val;
+    if (this.inputElement) {
+      this.inputElement.value = val;
+    }
   }
 
   onQueryChange = (newValue: string) => {
@@ -38,21 +43,19 @@ export default class HugoSearchInput
     this.queryStore.subscribe(this.onQueryChange);
 
     this.shadowRoot.addEventListener("slotchange", (event) => {
-      this.inputElement = (
-        event.target as HTMLSlotElement
-      ).assignedElements()[0] as HTMLInputElement;
+      let targetSlot = event.target as HTMLSlotElement;
+      this.inputElement = targetSlot.assignedElements()[0] as HTMLInputElement;
       if (this.inputElement) {
-        console.log(this.inputElement);
         this.inputElement.focus();
+        this.inputElement.addEventListener(
+          "keypress",
+          function (event: { key: string }) {
+            if (event.key === "Enter") {
+              this.queryStore.value = this.value;
+            }
+          }.bind(this)
+        );
       }
-      this.inputElement.addEventListener(
-        "keypress",
-        function (event: { key: string }) {
-          if (event.key === "Enter") {
-            this.queryStore.value = this.value;
-          }
-        }.bind(this)
-      );
     });
   }
 }
