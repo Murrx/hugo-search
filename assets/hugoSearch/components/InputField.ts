@@ -44,15 +44,27 @@ export default class HugoSearchInput
 
     this.shadowRoot.addEventListener("slotchange", (event) => {
       let targetSlot = event.target as HTMLSlotElement;
-      this.inputElement = targetSlot.assignedElements()[0] as HTMLInputElement;
-      if (this.inputElement) {
-        this.inputElement.focus();
-        this.inputElement.addEventListener(
+      if (targetSlot.name == "input") {
+        let target = targetSlot.assignedElements()[0] as HTMLInputElement;
+        this.inputElement = target;
+        target.focus();
+        target.addEventListener(
           "keypress",
           function (event: { key: string }) {
             if (event.key === "Enter") {
               this.queryStore.value = this.value;
             }
+          }.bind(this)
+        );
+      }
+
+      if (targetSlot.name == "reset") {
+        let target = targetSlot.assignedElements()[0] as HTMLInputElement;
+
+        target.addEventListener(
+          "click",
+          function () {
+            this.queryStore.value = "";
           }.bind(this)
         );
       }

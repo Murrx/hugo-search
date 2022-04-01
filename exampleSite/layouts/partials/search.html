@@ -2,7 +2,9 @@
 {{ partial "hugoSearch/buildJs.gohtml" . }}
 <hs-input>
   <input slot="input" type="text"></input>
+  <input slot="reset" value="reset" type="button" />
 </hs-input>
+
 <hs-message></hs-message>
 <ul id="posts">
   <hs-results class="search-results">
