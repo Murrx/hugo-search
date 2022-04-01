@@ -38,7 +38,9 @@ export default class HugoSearchInput
     this.queryStore.subscribe(this.onQueryChange);
 
     this.shadowRoot.addEventListener("slotchange", (event) => {
-      this.inputElement = event.target.assignedElements()[0];
+      this.inputElement = (
+        event.target as HTMLSlotElement
+      ).assignedElements()[0] as HTMLInputElement;
       if (this.inputElement) {
         console.log(this.inputElement);
         this.inputElement.focus();
