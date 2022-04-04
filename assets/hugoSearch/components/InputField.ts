@@ -8,7 +8,6 @@ export default class HugoSearchInput
   private inputElement: HTMLInputElement | null;
   private queryStore: Store<string>;
 
-  // todo: maybe provide a default for the slot?
   private _template = `<template>
     <slot name="input"> </slot>
     <slot name="reset"> </slot>
@@ -38,36 +37,43 @@ export default class HugoSearchInput
     }
   };
 
+  onSlotChange = (event: Event) => {
+    let targetSlot = event.target as HTMLSlotElement;
+    if (targetSlot.name == "input") {
+      this.onInputSlotChange(targetSlot);
+    } else if (targetSlot.name == "reset") {
+      this.onResetSlotChange(targetSlot);
+    }
+  };
+
+  onInputSlotChange = (slot: HTMLSlotElement) => {
+    let target = slot.assignedElements()[0] as HTMLInputElement;
+    this.inputElement = target;
+    target.focus();
+    target.addEventListener(
+      "keypress",
+      function (event: { key: string }) {
+        if (event.key === "Enter") {
+          this.queryStore.value = this.value;
+        }
+      }.bind(this)
+    );
+  };
+
+  onResetSlotChange = (slot: HTMLSlotElement) => {
+    let target = slot.assignedElements()[0] as HTMLInputElement;
+
+    target.addEventListener(
+      "click",
+      function () {
+        this.queryStore.value = "";
+      }.bind(this)
+    );
+  };
+
   connectedCallback() {
     this.queryStore = requestQueryStore(this);
     this.queryStore.subscribe(this.onQueryChange);
-
-    this.shadowRoot.addEventListener("slotchange", (event) => {
-      let targetSlot = event.target as HTMLSlotElement;
-      if (targetSlot.name == "input") {
-        let target = targetSlot.assignedElements()[0] as HTMLInputElement;
-        this.inputElement = target;
-        target.focus();
-        target.addEventListener(
-          "keypress",
-          function (event: { key: string }) {
-            if (event.key === "Enter") {
-              this.queryStore.value = this.value;
-            }
-          }.bind(this)
-        );
-      }
-
-      if (targetSlot.name == "reset") {
-        let target = targetSlot.assignedElements()[0] as HTMLInputElement;
-
-        target.addEventListener(
-          "click",
-          function () {
-            this.queryStore.value = "";
-          }.bind(this)
-        );
-      }
-    });
+    this.shadowRoot.addEventListener("slotchange", this.onSlotChange);
   }
 }
