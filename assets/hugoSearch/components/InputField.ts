@@ -11,6 +11,7 @@ export default class HugoSearchInput
   private _template = `<template>
     <slot name="input"> </slot>
     <slot name="reset"> </slot>
+    <slot name="search"> </slot>
   </template>`;
 
   constructor() {
@@ -43,6 +44,8 @@ export default class HugoSearchInput
       this.onInputSlotChange(targetSlot);
     } else if (targetSlot.name == "reset") {
       this.onResetSlotChange(targetSlot);
+    } else if (targetSlot.name == "search") {
+      this.onSearchSlotChange(targetSlot);
     }
   };
 
@@ -67,6 +70,16 @@ export default class HugoSearchInput
       "click",
       function () {
         this.queryStore.value = "";
+      }.bind(this)
+    );
+  };
+
+  onSearchSlotChange = (slot: HTMLSlotElement) => {
+    let target = slot.assignedElements()[0] as HTMLInputElement;
+    target.addEventListener(
+      "click",
+      function () {
+        this.queryStore.value = this.value;
       }.bind(this)
     );
   };
