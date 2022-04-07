@@ -5,7 +5,7 @@
 {{ end }}
 
 {{ $built := resources.Get "js/hugoSearch/main.ts" | js.Build (.Scratch.Get "opts") }}
-<script type="text/javascript" src="{{ $built.RelPermalink }}"></script>
+<script type="text/javascript" src="{{ $built.Permalink }}"></script>
 <script>
   HugoSearch.init({
     {{ with .Param "search.sections" }}
