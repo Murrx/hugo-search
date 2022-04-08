@@ -1,4 +1,4 @@
-import lunr from "./lib/lunr/lunr";
+import lunr from "lunr";
 import { QueryData, Store } from "./types/SearchStore.type";
 
 export class LunrSearchProvider {
