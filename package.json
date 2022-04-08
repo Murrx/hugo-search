@@ -1,28 +1,44 @@
 {
-  "name": "hugo-search",
-  "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
-    "@babel/preset-typescript": "^7.12.7",
-    "@types/jest": "^26.0.20",
-    "@types/lunr": "^2.3.3",
-    "babel-jest": "^26.6.3",
-    "jest": "^26.6.3",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.1.3"
-  },
-  "scripts": {
-    "test": "jest"
-  },
+ "comments": {
   "dependencies": {
-    "lunr": "^2.3.9"
+   "lunr": "project"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{html,js, ts,css,md}": "prettier --write"
+  "devDependencies": {
+   "@babel/core": "project",
+   "@babel/preset-env": "project",
+   "@babel/preset-typescript": "project",
+   "@types/jest": "project",
+   "@types/lunr": "project",
+   "babel-jest": "project",
+   "jest": "project",
+   "ts-node": "project",
+   "typescript": "project"
   }
+ },
+ "dependencies": {
+  "lunr": "^2.3.9"
+ },
+ "devDependencies": {
+  "@babel/core": "^7.12.10",
+  "@babel/preset-env": "^7.12.11",
+  "@babel/preset-typescript": "^7.12.7",
+  "@types/jest": "^26.0.20",
+  "@types/lunr": "^2.3.3",
+  "babel-jest": "^26.6.3",
+  "jest": "^26.6.3",
+  "ts-node": "^9.1.1",
+  "typescript": "^4.1.3"
+ },
+ "husky": {
+  "hooks": {
+   "pre-commit": "lint-staged"
+  }
+ },
+ "lint-staged": {
+  "*.{html,js, ts,css,md}": "prettier --write"
+ },
+ "name": "hugo-search",
+ "scripts": {
+  "test": "jest"
+ }
 }
